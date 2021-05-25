@@ -8,17 +8,18 @@ import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 
 /**
- * Persists throughout the entire lifecycle of the application
+ * Persists throughout the entire lifecycle of the application. Needs the
+ * AndroidSupportInjectionModule to generate the DaggerAppComponent in the
+ * Base App!
  */
 @Component(modules = [AndroidSupportInjectionModule::class])
-
 interface AppComponent : AndroidInjector<BaseApp> {
     @Component.Builder
     interface Builder {
 
         // Binds an object at the time of its construction
         @BindsInstance
-        fun application(application: Application?): AppComponent.Builder?
+        fun application(application: Application?): Builder?
         fun build(): AppComponent?
     }
 

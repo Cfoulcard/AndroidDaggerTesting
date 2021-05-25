@@ -1,7 +1,7 @@
 package com.example.android.android_dagger_testing
 
 import android.util.Log
-import com.example.android.android_dagger_testing.di.AppComponent
+import com.example.android.android_dagger_testing.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 
@@ -15,6 +15,6 @@ class BaseApp : DaggerApplication() {
     val log = Log.d("Singleton", "I'm here!")
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication>? {
-     return null
+        return DaggerAppComponent.builder().application(this)?.build()
     }
 }

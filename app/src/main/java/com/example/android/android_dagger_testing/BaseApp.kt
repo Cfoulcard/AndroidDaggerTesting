@@ -9,6 +9,9 @@ import dagger.android.support.DaggerApplication
  * Dagger Setup - This is the entry point that initialized first when the app is created
  * This is using the Dagger Support to handle older libraries. This class name is
  * also declared in the Android Manifest File to be instantiated before any other class
+ *
+ * This class and AppComponent provide the code needed to initialize Dagger on most projects,
+ * making it good to copy and paste
  */
 class BaseApp : DaggerApplication() {
 
@@ -18,3 +21,4 @@ class BaseApp : DaggerApplication() {
         return DaggerAppComponent.builder().application(this)?.build()
     }
 }
+

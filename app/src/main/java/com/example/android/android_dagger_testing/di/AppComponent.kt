@@ -12,7 +12,7 @@ import dagger.android.support.AndroidSupportInjectionModule
  * AndroidSupportInjectionModule to generate the DaggerAppComponent in the
  * Base App!
  */
-@Component(modules = [AndroidSupportInjectionModule::class])
+@Component(modules = [AndroidSupportInjectionModule::class, ActivityBuildersModule::class])
 interface AppComponent : AndroidInjector<BaseApp> {
     @Component.Builder
     interface Builder {

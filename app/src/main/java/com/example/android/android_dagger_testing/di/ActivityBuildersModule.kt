@@ -6,9 +6,9 @@ import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 
 /**
- * Modules are basically something used to hold dependencies
+ * Modules are basically something used to hold dependencies. Here is where we add activities
+ * we want to inject with dependencies. As the project builds more activities will be added here.
  */
-
 @Module
 abstract class ActivityBuildersModule {
 
@@ -16,10 +16,4 @@ abstract class ActivityBuildersModule {
     @ContributesAndroidInjector
     abstract fun contributeAuthActivity(): AuthActivity
 
-    companion object {
-        @Provides
-        fun someString(): String {
-            return "this is a test string"
-        }
-    }
 }

@@ -1,7 +1,9 @@
 package com.example.android.android_dagger_testing
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
+import android.widget.ImageView
+import com.bumptech.glide.RequestManager
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
@@ -9,20 +11,25 @@ class AuthActivity : DaggerAppCompatActivity() {
 
      val TAG = "AuthActivity"
 
-    @JvmField // Needed as Kotlin will produce an error converting Dagger/Java
+    @JvmField
     @Inject
-    var text: String? = null
+    var logo: Drawable? = null
 
     @JvmField
     @Inject
-    var isAppNull = false
+    var requestManager: RequestManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
-        val log = Log.d(TAG, text.toString())
-        val log2 = Log.d(TAG, isAppNull.toString())
+        setLogo()
+    }
+
+    private fun setLogo() {
+        requestManager
+            ?.load(logo)
+            ?.into(findViewById(R.id.login_logo))
 
     }
 

@@ -6,12 +6,16 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
+import javax.inject.Singleton
 
 /**
  * Persists throughout the entire lifecycle of the application. Needs the
  * AndroidSupportInjectionModule to generate the DaggerAppComponent in the
- * Base App!
+ * Base App! This also owns the Singleton scope.
  */
+
+@Singleton
+
 @Component(modules = [
     AndroidSupportInjectionModule::class,
     ActivityBuildersModule::class,

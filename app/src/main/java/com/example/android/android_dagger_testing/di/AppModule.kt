@@ -9,11 +9,16 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.android.android_dagger_testing.R
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class AppModule {
 
+    // Singletons are annotated below to make sure they are instantiated within the same scope as
+    // the Singleton in AppComponent
+
     // Dependency to fill in placeholder images
+    @Singleton
     @Provides
     fun provideRequestOptions(): RequestOptions? {
         return RequestOptions
@@ -22,6 +27,7 @@ class AppModule {
     }
 
     // Initialize Glide globally in the application along with Glide Requests
+    @Singleton
     @Provides
     fun provideGlideInstance(
         application: Application?,
@@ -32,6 +38,7 @@ class AppModule {
     }
 
     // Used for the logo
+    @Singleton
     @Provides
     fun provideAppDrawable(application: Application?): Drawable? {
         return ContextCompat.getDrawable(application!!, R.drawable.logo)

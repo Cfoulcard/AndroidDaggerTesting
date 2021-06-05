@@ -1,15 +1,24 @@
-package com.example.android.android_dagger_testing
+package com.example.android.android_dagger_testing.ui.auth
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.widget.ImageView
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.RequestManager
+import com.example.android.android_dagger_testing.R
+import com.example.android.android_dagger_testing.viewmodels.ViewModelProviderFactory
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
 class AuthActivity : DaggerAppCompatActivity() {
 
-     val TAG = "AuthActivity"
+    val TAG = "AuthActivity"
+
+    private var viewModel: AuthViewModel? = null
+
+    // Instantiates the View Model
+    @JvmField
+    @Inject
+    var providerFactory: ViewModelProviderFactory? = null
 
     @JvmField
     @Inject
@@ -22,6 +31,8 @@ class AuthActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
+
+        viewModel = ViewModelProviders.of(this, providerFactory)[AuthViewModel::class.java]
 
         setLogo()
     }

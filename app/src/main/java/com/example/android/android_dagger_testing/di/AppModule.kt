@@ -20,7 +20,7 @@ class AppModule {
     // Dependency to fill in placeholder images
     @Singleton
     @Provides
-    fun provideRequestOptions(): RequestOptions? {
+    fun provideRequestOptions(): RequestOptions {
         return RequestOptions
             .placeholderOf(R.drawable.white_background)
             .error(R.drawable.white_background)
@@ -43,5 +43,8 @@ class AppModule {
     fun provideAppDrawable(application: Application?): Drawable? {
         return ContextCompat.getDrawable(application!!, R.drawable.logo)
     }
+
+
+
 
 }

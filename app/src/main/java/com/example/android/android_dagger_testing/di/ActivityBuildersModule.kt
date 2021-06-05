@@ -1,8 +1,8 @@
 package com.example.android.android_dagger_testing.di
 
-import com.example.android.android_dagger_testing.AuthActivity
+import com.example.android.android_dagger_testing.di.auth.AuthViewModelsModule
+import com.example.android.android_dagger_testing.ui.auth.AuthActivity
 import dagger.Module
-import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 
 /**
@@ -13,7 +13,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBuildersModule {
 
     // Let's dagger know that AuthActivity is a potential client for dependency injection
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [AuthViewModelsModule::class])
     abstract fun contributeAuthActivity(): AuthActivity
 
 }

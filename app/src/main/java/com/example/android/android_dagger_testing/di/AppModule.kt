@@ -7,8 +7,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.example.android.android_dagger_testing.R
+import com.example.android.android_dagger_testing.util.Constants
 import dagger.Module
 import dagger.Provides
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -16,6 +19,17 @@ class AppModule {
 
     // Singletons are annotated below to make sure they are instantiated within the same scope as
     // the Singleton in AppComponent
+
+    // Retrofit to exist throughout entire application lifecycle
+    @Singleton
+    @Provides
+    fun provideRetrofitInstance(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+    }
 
     // Dependency to fill in placeholder images
     @Singleton

@@ -1,11 +1,9 @@
 package com.example.android.android_dagger_testing.ui.auth
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.example.android.android_dagger_testing.models.User
 import com.example.android.android_dagger_testing.network.auth.AuthApi
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -13,7 +11,27 @@ import javax.inject.Inject
  * Inject dependencies - Note that the authApi is annotated with the nullable
  * symbol "?" to prevent compile failure
  */
-class AuthViewModel @Inject constructor(private val authApi: AuthApi?) : ViewModel() {
+class AuthViewModel @Inject constructor(
+    private val authApi: AuthApi
+    ) : ViewModel() {
+
+    private val authUser = MediatorLiveData<User?>()
+
+    fun authenticateWithId(userId: Int) {
+        val source: LiveData<User?> = LiveDataReactiveStreams.fromPublisher(
+            authApi.getUser(userId)
+                !!.subscribeOn(Schedulers.io())
+        )
+        authUser.addSource(source) { user ->
+            authUser.value = user
+            authUser.removeSource(source)
+        }
+    }
+
+
+    fun observeUser(): MediatorLiveData<User?> {
+        return authUser
+    }
 
     companion object {
         private const val TAG = "AuthViewModel"
@@ -21,29 +39,8 @@ class AuthViewModel @Inject constructor(private val authApi: AuthApi?) : ViewMod
 
     init {
         Log.d(TAG, "AuthViewModel: viewmodel is working...")
-
-        if (authApi != null) {
-            Log.d(TAG, "AuthApi is NOT NULL")
-        } else {
-            Log.d(TAG, "AuthApi is NULL")
-        }
-
-        authApi?.getUser(1)
-            ?.toObservable()
-            ?.subscribeOn(Schedulers.io())
-            ?.subscribe(object : Observer<User?> {
-
-                override fun onSubscribe(d: Disposable) {}
-
-                override fun onNext(value: User?) {
-                    Log.d(TAG, "onNext: " + value?.getEmail())
-                }
-
-                override fun onError(e: Throwable) {}
-
-                override fun onComplete() {}
-            })
     }
 }
+
 
 

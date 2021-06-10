@@ -18,15 +18,15 @@
         android:layout_marginTop="16dp"/>
 
     <com.google.android.material.textfield.TextInputEditText
-        app:layout_constraintTop_toBottomOf="@+id/login_logo"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:hint="User id"
-        android:textColor="#000"
+        android:id="@+id/user_id_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/user_id_input"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:hint="UID - Enter a number between 1-10 - View Logcat"
+        android:textColor="#000"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_logo" />
 
     <Button
         app:layout_constraintTop_toBottomOf="@+id/user_id_input"
